@@ -3,48 +3,147 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 
 
-# Common technical skills database for matching
-TECHNICAL_SKILLS = {
-    # Programming Languages
-    "python", "java", "javascript", "typescript", "c++", "c#", "ruby", "php",
-    "swift", "kotlin", "go", "rust", "scala", "perl", "r", "matlab", "sql",
+# Comprehensive skills database for all types of jobs
+SKILLS_DATABASE = {
+    # Food & Culinary
+    "cooking", "baking", "grilling", "food preparation", "food handling",
+    "kitchen management", "menu planning", "catering", "bartending", "barista",
+    "food safety", "culinary arts", "pastry", "butchering", "sushi making",
+    "food plating", "recipe development", "inventory management",
 
-    # Web Technologies
-    "html", "css", "react", "angular", "vue", "node.js", "express", "django",
-    "flask", "fastapi", "spring", "laravel", "asp.net", "jquery", "bootstrap",
-    "tailwind", "sass", "webpack", "nextjs", "nuxtjs",
+    # Restaurant & Hospitality
+    "customer service", "cashier", "point of sale", "pos system", "waitstaff",
+    "table service", "hosting", "reservation management", "hotel management",
+    "front desk", "housekeeping", "room service", "concierge", "event planning",
+    "banquet service", "food service", "fast food", "fine dining",
 
-    # Databases
-    "mysql", "postgresql", "mongodb", "redis", "elasticsearch", "oracle",
-    "sqlite", "cassandra", "dynamodb", "firebase", "mariadb",
+    # Retail & Sales
+    "sales", "retail", "merchandising", "stock management", "inventory",
+    "visual merchandising", "product display", "cash handling", "upselling",
+    "customer relations", "store management", "loss prevention", "pricing",
 
-    # Cloud & DevOps
-    "aws", "azure", "gcp", "docker", "kubernetes", "jenkins", "terraform",
-    "ansible", "ci/cd", "git", "github", "gitlab", "bitbucket", "linux",
+    # Construction & Trades
+    "carpentry", "plumbing", "electrical", "welding", "masonry", "roofing",
+    "painting", "plastering", "tiling", "flooring", "concrete work",
+    "blueprint reading", "construction", "renovation", "demolition",
+    "scaffolding", "heavy equipment", "forklift", "crane operation",
+    "hvac", "air conditioning", "refrigeration",
 
-    # Data Science & AI
-    "machine learning", "deep learning", "tensorflow", "pytorch", "keras",
-    "pandas", "numpy", "scikit-learn", "nlp", "computer vision", "data analysis",
-    "data visualization", "tableau", "power bi", "spark", "hadoop",
+    # Automotive & Mechanical
+    "auto repair", "mechanic", "automotive", "engine repair", "brake repair",
+    "oil change", "tire service", "vehicle maintenance", "diesel mechanic",
+    "motorcycle repair", "auto body", "auto painting", "car wash",
 
-    # Mobile Development
-    "android", "ios", "react native", "flutter", "xamarin", "ionic",
+    # Beauty & Personal Care
+    "hairstyling", "hair cutting", "hair coloring", "barbering", "makeup",
+    "nail art", "manicure", "pedicure", "facial", "skin care", "massage",
+    "spa services", "waxing", "threading", "beauty consultation",
 
-    # Other Skills
-    "api", "rest", "graphql", "microservices", "agile", "scrum", "jira",
-    "figma", "adobe", "photoshop", "illustrator", "ui/ux", "project management"
+    # Healthcare & Medical
+    "nursing", "patient care", "first aid", "cpr", "vital signs",
+    "medication administration", "phlebotomy", "caregiving", "elderly care",
+    "childcare", "midwifery", "physical therapy", "dental assistant",
+    "medical records", "healthcare", "home care", "rehabilitation",
+
+    # Cleaning & Maintenance
+    "cleaning", "janitorial", "sanitation", "disinfection", "laundry",
+    "ironing", "housekeeping", "window cleaning", "carpet cleaning",
+    "pressure washing", "grounds maintenance", "landscaping", "gardening",
+    "lawn care", "tree trimming", "pest control",
+
+    # Security & Safety
+    "security", "guard", "surveillance", "cctv monitoring", "access control",
+    "patrol", "emergency response", "crowd control", "loss prevention",
+    "fire safety", "safety inspection", "security clearance",
+
+    # Transportation & Delivery
+    "driving", "delivery", "motorcycle delivery", "truck driving",
+    "forklift operation", "logistics", "route planning", "dispatching",
+    "warehouse", "shipping", "receiving", "packing", "loading",
+    "courier", "freight handling", "supply chain",
+
+    # Office & Administrative
+    "typing", "data entry", "filing", "scheduling", "receptionist",
+    "phone handling", "email management", "calendar management",
+    "office management", "administrative support", "bookkeeping",
+    "accounting", "payroll", "invoicing", "microsoft office", "excel",
+    "word processing", "spreadsheets", "presentations",
+
+    # Writing & Communication
+    "writing", "editing", "proofreading", "journalism", "reporting",
+    "content writing", "copywriting", "blogging", "social media",
+    "public relations", "press release", "creative writing", "translation",
+    "transcription", "technical writing", "documentation",
+
+    # Arts & Creative
+    "drawing", "illustration", "graphic design", "photography",
+    "videography", "video editing", "photo editing", "animation",
+    "crafts", "sewing", "embroidery", "pottery", "sculpture", "calligraphy",
+    "interior design", "fashion design", "jewelry making", "woodworking",
+
+    # Education & Training
+    "teaching", "tutoring", "lesson planning", "classroom management",
+    "curriculum development", "student assessment", "special education",
+    "early childhood education", "adult education", "training", "coaching",
+    "mentoring", "public speaking", "presentation skills",
+
+    # Agriculture & Farming
+    "farming", "planting", "harvesting", "irrigation", "crop management",
+    "livestock", "poultry", "fishing", "aquaculture", "organic farming",
+    "pesticide application", "farm equipment", "agricultural",
+
+    # Manufacturing & Production
+    "assembly", "machine operation", "quality control", "quality assurance",
+    "production line", "packaging", "labeling", "inspection", "soldering",
+    "sewing machine", "printing", "binding", "laminating",
+
+    # Technology & IT
+    "computer", "internet", "troubleshooting", "technical support", "networking",
+    "computer repair", "software installation", "hardware installation",
+    "python", "java", "javascript", "programming", "coding", "web development",
+    "mobile development", "database", "sql", "excel", "powerpoint",
+    "react", "node.js", "django", "flask", "docker", "aws", "git",
+    "html", "css", "typescript", "mongodb", "postgresql", "api",
+
+    # Finance & Accounting
+    "accounting", "bookkeeping", "budgeting", "financial reporting",
+    "tax preparation", "auditing", "billing", "collections", "credit analysis",
+    "cash management", "payroll processing", "accounts payable",
+    "accounts receivable", "quickbooks", "financial analysis",
+
+    # Legal & Government
+    "legal research", "document preparation", "notary", "court filing",
+    "legal transcription", "paralegal", "compliance", "regulatory",
+
+    # Soft Skills
+    "communication", "teamwork", "leadership", "problem solving",
+    "time management", "organization", "multitasking", "attention to detail",
+    "critical thinking", "decision making", "adaptability", "flexibility",
+    "work ethic", "reliability", "punctuality", "initiative", "creativity",
+    "negotiation", "conflict resolution", "stress management", "agile",
+
+    # Languages
+    "english", "filipino", "tagalog", "bicol", "cebuano", "ilocano",
+    "mandarin", "japanese", "korean", "spanish", "bilingual", "multilingual"
 }
 
-# Education keywords
+# Education keywords - expanded
 EDUCATION_KEYWORDS = [
     "bachelor", "master", "phd", "doctorate", "associate", "degree", "diploma",
-    "b.s.", "b.a.", "m.s.", "m.a.", "mba", "bscs", "bsit", "bsis"
+    "b.s.", "b.a.", "m.s.", "m.a.", "mba", "bscs", "bsit", "bsis", "bsba",
+    "bsed", "beed", "bsn", "bs ", "ba ", "ms ", "ma ",
+    "certificate", "certification", "vocational", "technical", "tesda",
+    "nc i", "nc ii", "nc iii", "nc iv", "national certificate",
+    "high school", "senior high", "junior high", "secondary",
+    "elementary", "primary", "grade school",
+    "graduate", "undergraduate", "college", "university"
 ]
 
-# Experience keywords
-EXPERIENCE_KEYWORDS = [
-    "experience", "work history", "employment", "professional experience",
-    "work experience", "career history"
+# Section markers
+SECTION_MARKERS = [
+    "experience", "education", "skills", "summary", "objective",
+    "profile", "work history", "employment", "qualifications",
+    "certifications", "projects", "references", "contact"
 ]
 
 
@@ -62,8 +161,28 @@ class NLPExtractor:
     """Service for extracting structured information from resume text using regex patterns."""
 
     def __init__(self):
-        # No external dependencies needed - pure Python regex
         pass
+
+    def _split_into_lines(self, text: str) -> List[str]:
+        """Split text into lines, handling both newline-separated and continuous text."""
+        # First try normal newline split
+        lines = text.split('\n')
+
+        # If we only got 1-2 lines, the PDF might not have preserved newlines
+        # Try to split on common section headers
+        if len(lines) <= 2 and len(text) > 200:
+            # Insert newlines before common section headers
+            for marker in SECTION_MARKERS:
+                # Case insensitive replacement
+                pattern = re.compile(r'\s+(' + re.escape(marker) + r')\s+', re.IGNORECASE)
+                text = pattern.sub(r'\n\1\n', text)
+
+            # Also split on patterns like "Phone", "Email", "Location"
+            text = re.sub(r'\s+(Phone|Email|Location|Address|LinkedIn|Mobile)\s*', r'\n\1 ', text, flags=re.IGNORECASE)
+
+            lines = text.split('\n')
+
+        return [line.strip() for line in lines if line.strip()]
 
     def extract_email(self, text: str) -> Optional[str]:
         """Extract email address from text."""
@@ -74,142 +193,193 @@ class NLPExtractor:
     def extract_phone(self, text: str) -> Optional[str]:
         """Extract phone number from text."""
         phone_patterns = [
-            r'\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}',
-            r'\d{4}[-.\s]?\d{3}[-.\s]?\d{4}',
-            r'\(\d{3}\)\s*\d{3}[-.\s]?\d{4}',
-            r'09\d{9}'  # Philippines mobile format
+            r'09\d{9}',  # Philippines mobile: 09XXXXXXXXX
+            r'\+63\s*\d{10}',  # Philippines with country code
+            r'\+63\s*\d{3}\s*\d{3}\s*\d{4}',  # +63 XXX XXX XXXX
+            r'\d{3}[-.\s]\d{3}[-.\s]\d{4}',  # XXX-XXX-XXXX or XXX.XXX.XXXX
+            r'\(\d{3}\)\s*\d{3}[-.\s]?\d{4}',  # (XXX) XXX-XXXX
         ]
 
         for pattern in phone_patterns:
             matches = re.findall(pattern, text)
             if matches:
-                return matches[0]
+                return matches[0].strip()
         return None
 
     def extract_name(self, text: str) -> Optional[str]:
-        """Extract person name from text using heuristics."""
-        lines = text.split('\n')
+        """Extract person name from text using multiple strategies."""
 
-        # Try to get name from first few lines
-        for line in lines[:5]:
+        # Strategy 1: Look for name before "Phone" or "Email" keywords
+        # Pattern like "ALEX R. DEVELOPER Phone..." or "John Doe Email:"
+        name_before_contact = re.search(
+            r'^([A-Z][A-Za-z]+(?:\s+[A-Z]\.?\s*)?(?:\s+[A-Z][A-Za-z]+)+)\s*(?:Phone|Email|Mobile|Contact|Address|\|)',
+            text,
+            re.MULTILINE
+        )
+        if name_before_contact:
+            name = name_before_contact.group(1).strip()
+            if 2 <= len(name.split()) <= 5:
+                return name
+
+        # Strategy 2: Look for all-caps name at the start
+        all_caps_name = re.search(r'^([A-Z][A-Z\s.]+[A-Z])\s', text)
+        if all_caps_name:
+            name = all_caps_name.group(1).strip()
+            words = name.split()
+            if 2 <= len(words) <= 5 and not any(w.lower() in SECTION_MARKERS for w in words):
+                return name
+
+        # Strategy 3: Check first few lines
+        lines = self._split_into_lines(text)
+
+        skip_words = [
+            'resume', 'cv', 'curriculum', 'vitae', 'profile', 'contact',
+            'phone', 'address', 'summary', 'objective', 'experience',
+            'education', 'skills', 'reference', 'personal', 'information',
+            'email', 'mobile', 'linkedin', 'github'
+        ]
+
+        for line in lines[:10]:
             line = line.strip()
-            if not line:
+            if not line or len(line) < 3 or len(line) > 50:
                 continue
 
-            # Skip common header words
-            skip_words = ['resume', 'cv', 'curriculum', 'vitae', 'profile',
-                         'contact', 'email', 'phone', 'address', 'summary']
-            if any(kw in line.lower() for kw in skip_words):
+            line_lower = line.lower()
+
+            # Skip if contains contact info or section headers
+            if any(kw in line_lower for kw in skip_words):
+                continue
+            if '@' in line or re.search(r'\d{3,}', line):
                 continue
 
-            # Skip lines with email or phone
-            if '@' in line or re.search(r'\d{3}[-.\s]?\d{3}', line):
-                continue
-
-            # Name is likely 2-4 words, no numbers
+            # Check if it looks like a name
             words = line.split()
-            if 1 <= len(words) <= 4 and not any(c.isdigit() for c in line):
-                # Check if it looks like a name (starts with capital letters)
-                if all(w[0].isupper() for w in words if w):
-                    return line
+            if not (2 <= len(words) <= 5):
+                continue
+
+            # All words should start with capital letter
+            valid_name = all(
+                word[0].isupper() or word[0].isalpha() == False
+                for word in words if word
+            )
+
+            if valid_name:
+                return line
 
         return None
 
     def extract_skills(self, text: str) -> List[str]:
         """Extract skills from text using keyword matching."""
         text_lower = text.lower()
-        found_skills = []
+        found_skills = set()
 
-        # Match against known skills database
-        for skill in TECHNICAL_SKILLS:
-            # Use word boundary matching
-            pattern = r'\b' + re.escape(skill) + r'\b'
-            if re.search(pattern, text_lower):
-                # Capitalize properly
-                if len(skill) <= 3:
-                    found_skills.append(skill.upper())
-                elif skill in ['node.js', 'asp.net', 'ci/cd', 'ui/ux']:
-                    found_skills.append(skill)
-                else:
-                    found_skills.append(skill.title())
+        for skill in SKILLS_DATABASE:
+            if ' ' in skill:
+                if skill in text_lower:
+                    found_skills.add(skill.title())
+            else:
+                pattern = r'\b' + re.escape(skill) + r'\b'
+                if re.search(pattern, text_lower):
+                    if len(skill) <= 3 and skill.isalpha():
+                        found_skills.add(skill.upper())
+                    else:
+                        found_skills.add(skill.title())
 
-        return list(set(found_skills))
+        return sorted(list(found_skills))
 
     def extract_education(self, text: str) -> List[Dict[str, Any]]:
         """Extract education information from text."""
         education_list = []
-        lines = text.split('\n')
+        lines = self._split_into_lines(text)
 
-        in_education_section = False
-        education_lines = []
+        # Find education section
+        in_education = False
+        education_text = []
 
-        for line in lines:
-            line_lower = line.lower().strip()
+        for i, line in enumerate(lines):
+            line_lower = line.lower()
 
             # Check if entering education section
-            if any(kw in line_lower for kw in ['education', 'academic', 'qualification']):
-                in_education_section = True
+            if 'education' in line_lower and len(line) < 50:
+                in_education = True
                 continue
 
             # Check if leaving education section
-            if in_education_section and any(kw in line_lower for kw in EXPERIENCE_KEYWORDS + ['skills', 'references']):
-                break
+            if in_education:
+                if any(marker in line_lower for marker in ['experience', 'skills', 'projects', 'references', 'certifications']):
+                    if len(line) < 50:  # It's a header, not content
+                        break
 
-            if in_education_section and line.strip():
-                education_lines.append(line.strip())
+                education_text.append(line)
+
+        # If no education section found, search whole text
+        if not education_text:
+            education_text = lines
 
         # Parse education entries
-        current_entry = {}
-        for line in education_lines:
+        for line in education_text:
             line_lower = line.lower()
 
-            # Check for degree keywords
-            if any(kw in line_lower for kw in EDUCATION_KEYWORDS):
-                if current_entry:
-                    education_list.append(current_entry)
-                current_entry = {"degree": line}
-            elif current_entry and not current_entry.get("institution"):
-                current_entry["institution"] = line
+            # Check for degree/education keywords
+            has_edu_keyword = any(kw in line_lower for kw in EDUCATION_KEYWORDS)
 
-        if current_entry:
-            education_list.append(current_entry)
+            if has_edu_keyword:
+                # Extract year if present
+                year_match = re.search(r'(19|20)\d{2}', line)
+                entry = {"degree": line}
+                if year_match:
+                    entry["year"] = year_match.group()
+                education_list.append(entry)
 
         return education_list
 
     def extract_experience(self, text: str) -> List[Dict[str, Any]]:
         """Extract work experience information from text."""
         experience_list = []
-        lines = text.split('\n')
+        lines = self._split_into_lines(text)
 
-        in_experience_section = False
-        experience_lines = []
+        # Find experience section
+        in_experience = False
+        experience_text = []
 
         for line in lines:
-            line_lower = line.lower().strip()
+            line_lower = line.lower()
 
             # Check if entering experience section
-            if any(kw in line_lower for kw in EXPERIENCE_KEYWORDS):
-                in_experience_section = True
-                continue
+            if any(kw in line_lower for kw in ['experience', 'employment', 'work history']):
+                if len(line) < 50:  # It's a header
+                    in_experience = True
+                    continue
 
             # Check if leaving experience section
-            if in_experience_section and any(kw in line_lower for kw in ['education', 'skills', 'references']):
-                break
+            if in_experience:
+                if any(marker in line_lower for marker in ['education', 'skills', 'projects', 'references']):
+                    if len(line) < 50:
+                        break
 
-            if in_experience_section and line.strip():
-                experience_lines.append(line.strip())
+                experience_text.append(line)
 
-        # Parse experience entries
-        date_pattern = r'\d{4}\s*[-–]\s*(\d{4}|present|current)'
-        current_entry = {}
+        # If no experience section found, search for date patterns
+        if not experience_text:
+            experience_text = lines
 
-        for line in experience_lines:
-            # Check if line contains date range (likely new position)
-            if re.search(date_pattern, line.lower()):
+        # Parse experience entries - look for date patterns
+        date_pattern = r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s*\d{4}|(?:19|20)\d{2})\s*[-–—to]+\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s*\d{4}|(?:19|20)\d{2}|[Pp]resent|[Cc]urrent)'
+
+        current_entry = None
+
+        for line in experience_text:
+            # Check if line contains date range
+            date_match = re.search(date_pattern, line)
+
+            if date_match:
                 if current_entry:
                     experience_list.append(current_entry)
-                current_entry = {"title": line}
-            elif current_entry:
+                current_entry = {
+                    "title": line,
+                    "dates": date_match.group()
+                }
+            elif current_entry and len(line) > 10:
                 if not current_entry.get("company"):
                     current_entry["company"] = line
                 elif not current_entry.get("description"):

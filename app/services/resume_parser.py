@@ -22,32 +22,47 @@ class ResumeParser:
         try:
             with pdfplumber.open(file_path) as pdf:
                 for page in pdf.pages:
-                    page_text = page.extract_text()
+                    # Extract text with layout preservation
+                    page_text = page.extract_text(
+                        x_tolerance=3,
+                        y_tolerance=3,
+                        layout=False
+                    )
                     if page_text:
                         text_content.append(page_text)
         except Exception as e:
             raise ValueError(f"Failed to extract text from PDF: {str(e)}")
 
-        return "\n".join(text_content)
+        return "\n\n".join(text_content)
 
     @staticmethod
     def clean_text(text: str) -> str:
         """
-        Clean and normalize extracted text.
+        Clean and normalize extracted text while preserving structure.
 
         Args:
             text: Raw extracted text
 
         Returns:
-            Cleaned text
+            Cleaned text with preserved line breaks
         """
-        # Remove excessive whitespace
-        text = re.sub(r'\s+', ' ', text)
+        # Normalize line endings
+        text = text.replace('\r\n', '\n').replace('\r', '\n')
 
-        # Remove special characters but keep basic punctuation
-        text = re.sub(r'[^\w\s@.,-]', '', text)
+        # Replace multiple spaces (but not newlines) with single space
+        text = re.sub(r'[^\S\n]+', ' ', text)
 
-        return text.strip()
+        # Remove excessive blank lines (more than 2 consecutive)
+        text = re.sub(r'\n{3,}', '\n\n', text)
+
+        # Clean up lines - strip each line
+        lines = [line.strip() for line in text.split('\n')]
+        text = '\n'.join(lines)
+
+        # Remove empty lines at start/end
+        text = text.strip()
+
+        return text
 
     def parse(self, file_path: str) -> str:
         """
