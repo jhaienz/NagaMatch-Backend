@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     # Embedding model
     embedding_model: str = "all-MiniLM-L6-v2"
 
+    # Optional API keys
+    gemini: str = ""
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
